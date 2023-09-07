@@ -22,6 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path("__debug__/", include("debug_toolbar.urls")),
-    path('login/',auth_view.LoginView.as_view, name='login'),
-    path('login/',include('core.urls'))
+    path('login/',auth_view.LoginView.as_view(), name='login'),
+    path('login/',include('core.urls')),    
 ]
