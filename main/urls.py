@@ -25,3 +25,4 @@ urlpatterns = [
     path('login/',auth_view.LoginView.as_view(), name='login'),
     path('login/',include('core.urls')),    
 ]
+
