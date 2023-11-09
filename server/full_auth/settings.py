@@ -152,7 +152,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {
     
     'DEFAULT_AUTHENTICATION_CLASSES': [
-                'rest_framework_simplejwt.authentication.JWTAuthentication',
+                'users.authentication.CustomJWTAuthentication',
     ],
     
     'DEFAULT_PERMISSION_CLASSES': [
@@ -169,10 +169,13 @@ DJOSER = {
     'TOKEN_MODEL':None,
 }
 
+AUTH_COOKIE = 'access'
+
 CORS_ALLOWED_ORIGINS = getenv(
     'CORS_ALLOWED_ORIGINS',
     'http://localhost:3000,http://127.0.0.1:3000'
     ).split(',')
-CORS_ALLOWED_CREDENTIALS = True
+CORS_ALLOWED_CREDENTIALS = True         # For this we also use the custom authentication, to use cookies for authorization.
+  
 
 AUTH_USER_MODEL = 'users.UserAccount'
