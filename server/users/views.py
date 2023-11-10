@@ -1,3 +1,12 @@
-from django.shortcuts import render
+from django.conf import settings
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+    TokenVerifyView
+)
 
-# Create your views here.
+class CustomTokenObtainPairView(TokenObtainPairView):
+    def post(self, request, *args,**kwargs):
+        response = super().post(request,*args,**kwargs)
+        
+        
