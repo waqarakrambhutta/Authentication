@@ -40,7 +40,8 @@ class CustomTokenRefreshView(TokenRefreshView):
     def post(self, request, *args, **kwargs):
         refresh_token = request.COOKIES.get('refresh')
         
-        if refresh_token:
+
+
             request.data['refresh'] = refresh_token
             
         response = super().post(request,*args,**kwargs)
@@ -57,7 +58,9 @@ class CustomTokenRefreshView(TokenRefreshView):
                 httponly = settings.AUTH_COOKIE_HTTP_ONLY,
                 samesite = settings.AUTH_COOKIE_SAMESITE,
             )
-        return response  
+        return response
+        
+          
         
         
         
