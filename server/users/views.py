@@ -42,7 +42,7 @@ class CustomTokenRefreshView(TokenRefreshView):
         
 
 
-            request.data['refresh'] = refresh_token
+        request.data['refresh'] = refresh_token
             
         response = super().post(request,*args,**kwargs)
         
@@ -59,8 +59,8 @@ class CustomTokenRefreshView(TokenRefreshView):
                 samesite = settings.AUTH_COOKIE_SAMESITE,
             )
         return response
-        
-          
+
+
         
         
         
