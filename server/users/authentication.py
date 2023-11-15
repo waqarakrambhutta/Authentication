@@ -2,7 +2,7 @@ from django.conf import settings
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
 # this setup to use COOKIES for authorize request.
-class CustomJWRAuthentication(JWTAuthentication):
+class CustomJWTAuthentication(JWTAuthentication):
     def authenticate(self, request):
         try:
             header = self.get_header(request)
