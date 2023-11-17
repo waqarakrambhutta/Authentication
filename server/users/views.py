@@ -72,6 +72,3 @@ class LogoutView(APIView):
         response.delete_cookie('refresh')   
 
         return response 
-
-
-             
