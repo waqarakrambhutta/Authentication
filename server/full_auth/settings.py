@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'djoser',
     'django_ses',
+    'social_django',
     'users',
 ]
 
@@ -49,9 +50,9 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
 ]
 
 ROOT_URLCONF = 'full_auth.urls'
@@ -86,6 +87,12 @@ DATABASES = {
         'USER': 'root',
         'PASSWORD': 'waqar123!@#'
     }
+}
+
+AUTHENTICATION_BACKENDS = {
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.facebook.FacebookOAuth2',
+    'django.contrib.auth.backends.ModelBackend'
 }
 
 
