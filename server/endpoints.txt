@@ -1,0 +1,1 @@
+GET http://localhost:8000/api/o/google-oauth2/?redirect_uri=http://localhost:3000/auth/google

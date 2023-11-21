@@ -158,7 +158,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {
     
     'DEFAULT_AUTHENTICATION_CLASSES': [
-                'users.authentication.CustomJWTAuthentication',
+            'users.authentication.CustomJWTAuthentication',
     ],
     
     'DEFAULT_PERMISSION_CLASSES': [
@@ -177,8 +177,8 @@ DJOSER = {
 }
 
 AUTH_COOKIE = 'access'
-AUTH_COOKIE_ACCESS_MAX_AGE = 60 * 5
-AUTH_COOKIE_REFRESH_MAX_AGE = 60 * 60 * 24
+# AUTH_COOKIE_ACCESS_MAX_AGE = 60 * 5
+AUTH_COOKIE_MAX_AGE = 60 * 60 * 24
 AUTH_COOKIE_SECURE = getenv('AUTH_COOKIE_SECURE','True') == 'True' # we'll set it false in env. because we want to keep if off in production.
 AUTH_COOKIE_HTTP_ONLY = True
 AUTH_COOKIE_PATH = '/'
