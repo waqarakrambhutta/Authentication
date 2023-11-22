@@ -9,12 +9,14 @@ defusedxml==0.8.0rc2
 Django==4.2.7
 django-cors-headers==4.3.0
 django-ses==3.5.0
+django-storages==1.14.2
 django-templated-mail==1.1.1
 djangorestframework==3.14.0
 djangorestframework-simplejwt==5.3.0
 djoser==2.2.1
 idna==3.4
 jmespath==1.0.1
+mysqlclient==2.2.0
 oauthlib==3.2.2
 pycparser==2.21
 PyJWT==2.8.0

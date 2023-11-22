@@ -11,6 +11,9 @@ dotevn_file = BASE_DIR / '.env.local'
 
 if path.isfile(dotevn_file):
     dotenv.load_dotenv(dotevn_file)
+    
+DEVELOPMENT_MODE = getenv("DEVELOPMENT_MODE", "False") == "True"
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
