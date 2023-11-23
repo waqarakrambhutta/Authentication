@@ -1,6 +1,8 @@
+import sys
+import dotenv
+import dj_database_url
 from pathlib import Path
 from os import getenv,path
-import dotenv
 from django.core.management.utils import get_random_secret_key
 
 
@@ -82,16 +84,25 @@ WSGI_APPLICATION = 'full_auth.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'Authentication',
-        'HOST': 'localhost',
-        'USER': 'root',
-        'PASSWORD': 'waqar123!@#'
-    }
-}
 
+if DEVELOPMENT_MODE is True:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'Authentication',
+            'HOST': 'localhost',
+            'USER': 'root',
+            'PASSWORD': 'waqar123!@#'
+        }
+    }
+elif len(sys.argv) > 0 and sys.argv[1] != 'collectstatic':
+    if getenv('DATABASE_URL', None) is None:
+        raise Exception("DATABASE_URL environment variable not defined")
+    DATABASES = {
+        "default": dj_database_url.parse(getenv.get("DATABASE_URL")),
+    }
+    
+    
 AUTHENTICATION_BACKENDS = {
     'social_core.backends.google.GoogleOAuth2',
     'social_core.backends.facebook.FacebookOAuth2',
@@ -146,11 +157,28 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
+if DEVELOPMENT_MODE is True:
+    STATIC_URL = 'static/'
+    STATIC_ROOT = BASE_DIR / 'static'
+    MEDIA_URL = 'media/'
+    MEDIA_ROOT = BASE_DIR / 'media'
+else:
+    AWS_S3_ACCESS_KEY_ID = getenv('AWS_S3_ACCESS_KEY_ID')
+    AWS_S3_SECRET_ACCESS_KEY = getenv('AWS_S3_SECRET_ACCESS_KEY')
+    AWS_STORAGE_BUCKET_NAME = getenv('AWS_STORAGE_BUCKET_NAME')
+    AWS_S3_REGION_NAME = getenv('AWS_S3_REGION_NAME')
+    AWS_S3_ENDPOINT_URL = f'https://{AWS_S3_REGION_NAME}.digitaloceanspaces.com'
+    AWS_S3_OBJECT_PARAMETERS = {
+        'CacheControl':'max_age=86400'
+    }
+    AWS_DEFAULT_ACL = 'public-read'
+    AWS_LOCATION = 'static'
+    AWS_S3_CUSTOM_DOMAIN = getenv('AWS_S3_CUSTOM_DOMAIN')
+    STORAGES = {
+    'default': {'BACKEND': 'storages.backends.s3.S3Storage'},
+    }
+    STATICFILES_STORAGE = 'storages.backends.s3.S3Storage'
 
-STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'static'
-MEDIA_URL = 'media/'
-MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
