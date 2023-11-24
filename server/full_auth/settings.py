@@ -14,7 +14,7 @@ dotevn_file = BASE_DIR / '.env.local'
 if path.isfile(dotevn_file):
     dotenv.load_dotenv(dotevn_file)
     
-DEVELOPMENT_MODE = getenv("DEVELOPMENT_MODE", "False") == "True"
+DEVELOPMENT_MODE = getenv('DEVELOPMENT_MODE', 'False') == 'True'
 
 
 # Quick-start development settings - unsuitable for production
@@ -27,9 +27,9 @@ SECRET_KEY = getenv('DJANGO_SECRET_KEY', get_random_secret_key())
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = getenv('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = getenv("DJANGO_ALLOWED_HOSTS", 
-                       "127.0.0.1,localhost"
-                       ).split(",")
+ALLOWED_HOSTS = getenv('DJANGO_ALLOWED_HOSTS', 
+                       '127.0.0.1,localhost'
+                       ).split(',')
 
 
 # Application definition
@@ -97,9 +97,9 @@ if DEVELOPMENT_MODE is True:
     }
 elif len(sys.argv) > 0 and sys.argv[1] != 'collectstatic':
     if getenv('DATABASE_URL', None) is None:
-        raise Exception("DATABASE_URL environment variable not defined")
+        raise Exception('DATABASE_URL environment variable not defined')
     DATABASES = {
-        "default": dj_database_url.parse(getenv.get("DATABASE_URL")),
+        'default': dj_database_url.parse(getenv.get('DATABASE_URL')),
     }
     
     
