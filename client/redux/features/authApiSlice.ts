@@ -18,7 +18,8 @@ const authApiSlice = apiSlice.injectEndpoints({
     }),
 });
 
-export const {useRetrieveUser,useSocialAuthenticationMutation} = authApiSlice;
+
+export const {retrieveUser,socialAuthentication} = authApiSlice.endpoints;
 
 
 
