@@ -54,11 +54,49 @@ const authApiSlice = apiSlice.injectEndpoints({
                 method: "POST"
             }),
         }),
+        logout: builder.mutation({
+            query: () => ({
+                url: '/logout/',
+                method: "POST"
+            }),
+        }),
+        activation: builder.mutation({
+            query: ({ uid, token }) => ({
+                url: '/users/activation/',
+                method: "POST",
+                body: { uid, token }
+            }),
+        }),
+        resetpassword: builder.mutation({
+            query: (email) => ({
+                url: '/users/reset_password/',
+                method: "POST",
+                body: { email }
+            }),
+        }),
+        resetpasswordconfirm: builder.mutation({
+            query: ({ uid, token, new_password, re_new_password }) => ({
+                url: '/users/reset_password_confirm/',
+                method: "POST",
+                body:{ uid, token, new_password, re_new_password }
+            }),
+        }),
     }),
 });
 
 
-export const { retrieveUser, socialAuthentication, login, register, verify } = authApiSlice.endpoints;
+export const {
+    retrieveUser,
+    socialAuthentication,
+    login,
+    register,
+    verify,
+    logout,
+    activation,
+    resetpassword,
+    resetpasswordconfirm
+} = authApiSlice.endpoints;
+
 
 
 
