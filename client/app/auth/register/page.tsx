@@ -5,10 +5,12 @@ import Link from "next/link";
 
 import { useState, ChangeEvent, FormEvent } from "react";
 import { useRegisterMutation } from "@/redux/features/authApiSlice";
+import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
 const Page = () => {
 
+  const router = useRouter();
   const [register]=useRegisterMutation();
 
   const [formData, setFormData] = useState({
@@ -33,6 +35,7 @@ const Page = () => {
       .unwrap()
       .then(()=>{
         toast.success('Please check email to verify account')
+        router.push('/auth/login')
       })
       .catch(()=>{
         toast.error('Failed to verify account')
