@@ -5,6 +5,7 @@ import Link from "next/link";
 
 import { useState, ChangeEvent, FormEvent } from "react";
 import { useRegisterMutation } from "@/redux/features/authApiSlice";
+import { toast } from "react-toastify";
 
 const Page = () => {
 
@@ -29,8 +30,13 @@ const Page = () => {
     event.preventDefault();
 
     register({ first_name, last_name, email, password, re_password })
-      .unwrap
-
+      .unwrap()
+      .then(()=>{
+        toast.success('Please check email to verify account')
+      })
+      .catch(()=>{
+        toast.error('Failed to verify account')
+      })
   }
 
   return (
